@@ -3,12 +3,12 @@
 // The first argument is the Movie ID - example: 3 = “Return of the Jedi”
 // Display one character name by line in the same order of
 // the list “characters” in the /films/ response.
-// endpoint: https://swapi-api.hbtn.io/api/films/:id
+// endpoint: https://swapi-api.alx-tools.com/api/films/:id
 // ./0-starwars_characters.js 3
 
 const request = require('request');
 const id = process.argv[2];
-const url = `https://swapi-api.hbtn.io/api/films/${id}`;
+const url = `https://swapi-api.alx-tools.com/api/films/${id}`;
 
 // get list of characters url
 request(url, async function (error, response, body) {
