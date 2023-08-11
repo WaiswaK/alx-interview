@@ -4,29 +4,26 @@
 // Display one character name by line in the same order of
 // the list “characters” in the /films/ response.
 // endpoint: https://swapi-api.alx-tools.com/api/films/:id
-// ./0-starwars_characters.js 3
+// ./0-starwars_characters.js 
 
 const request = require('request');
-const id = process.argv[2];
-const url = `https://swapi-api.alx-tools.com/api/films/${id}`;
+const filmId = process.argv[2];
+const url = `https://swapi-api.hbtn.io/api/films/${filmId}`;
+// https://swapi-api.alx-tools.com/api/planets/1/
 
-// get list of characters url
-request(url, async function (error, response, body) {
-  if (error) {
-    console.log(error);
-  } else {
-    const characters = JSON.parse(body).characters;
-    for (const character of characters) {
-      const res = await new Promise((resolve, reject) => {
-        request(character, (error, res, html) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(JSON.parse(html).name);
-          }
-        });
+request(url, async (err, response, body) => {
+  if (err) {
+    console.log(err);
+  }
+  for (const characterId of JSON.parse(body).characters) {
+    await new Promise((resolve, reject) => {
+      request(characterId, (err, response, body) => {
+        if (err) {
+          reject(err);
+        }
+        console.log(JSON.parse(body).name);
+        resolve();
       });
-      console.log(res);
-    }
+    });
   }
 });
